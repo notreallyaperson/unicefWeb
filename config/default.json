@@ -1,0 +1,5 @@
+{
+    "mongoURI": "mongodb+srv://admin:X7fII4rXSQDwxA1m@cluster0.1q05w.mongodb.net/unicef?retryWrites=true&w=majority",
+    "jwtSecret": "BoCSpecial&*1Keyaf2",
+    "password": "qFZjr-@Pdn&b8^F>"
+ }
