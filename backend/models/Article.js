@@ -16,6 +16,16 @@ const articleSchema = new Schema(
 		content: {
 			type: String,
 		},
+		// k=50 we will have an array of 50 parameter values
+		gamma: [{
+			value: [],
+			ldaModelId: {
+				type: String
+			},
+			lamdaId: {
+				type: String
+			},
+		}],
 	},
 	{
 		timestamps: true,

@@ -39,7 +39,7 @@ mongoose
         app.get('/test', (req, res) => {
             var dataToSend;
             // spawn new child process to call the python script
-            const python = spawn('python', [__dirname + '/script.py'])
+            const python = spawn('python3', [__dirname + '/script.py'])
             // collect data from script
             python.stdout.on('data', function (data) {
                 console.log('Pipe data from python script ...');
@@ -50,7 +50,8 @@ mongoose
                 console.log(`child process close all stdio with code ${code}`);
                 // send data to browser
                 console.log(dataToSend)
-                // res.send(dataToSend)
+                
+                res.send(dataToSend)
             });
         })
 

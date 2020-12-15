@@ -1,1 +1,5 @@
-print('Hello from python')
+import sys
+
+x=3
+
+print(x)
