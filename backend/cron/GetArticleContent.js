@@ -11,4 +11,3 @@ output  = array of Content (strings)
 // map content to article document
 
 // Update mongodb articles with content
-
