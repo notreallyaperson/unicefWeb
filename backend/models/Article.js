@@ -4,9 +4,9 @@ const Schema = mongoose.Schema;
 
 const articleSchema = new Schema(
 	{
-		_id: {
-			type: Int32Array
-		},
+		// _id: {
+		// 	type: Int32Array
+		// },
 		title: {
 			type: String,
 		},
