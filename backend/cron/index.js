@@ -2,6 +2,7 @@ const axios = require('axios');
 
 const processFeeds = require('./ProcessFeeds');
 const updateArticlesDatabase = require('./UpdateArticlesDatabase');
+const updateFeedsDatabase = require('./UpdateFeedsDatabase');
 const testBreakingConditions = require('./TestBreakingConditions');
 const getTotalArticles = require('./GetTotalArticles')
 
@@ -43,16 +44,19 @@ axios.get('http://localhost:5000/api/rssfeeds')
         rssFeeds = rssFeeds.filter((value, index, arr) => processedFeeds[index] != null);
         processedFeeds = processedFeeds.filter((value, index, arr) => processedFeeds[index] != null);
 
-        console.log(rssFeeds)
-        // Update feeds
+        // Update feeds details and upload articles
         for (var i=0; i<processedFeeds.length; i++) {
           const { nextFeedAttrs, nextTotalArticles } = updateArticlesDatabase(rssFeeds[i], processedFeeds[i], totalArticles);
           rssFeeds[i] = nextFeedAttrs;
           rssFeeds[i]['numberOfArticles'] = rssFeeds[i].numberOfArticles + nextTotalArticles - totalArticles;
+          // Overwrite old attributes (TODO !!! Handle change more carefully, maybe not?)
+          rssFeeds[i]['title'] = processedFeeds[i].title;
+          rssFeeds[i]['siteUrl'] = processedFeeds[i].link;
           totalArticles = nextTotalArticles;
         }
 
-        console.log(rssFeeds)
+        // update feeds in database
+        updateFeedsDatabase(rssFeeds);
 
       })
       .catch( err => {

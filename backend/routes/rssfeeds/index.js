@@ -22,7 +22,7 @@ router.route('/').get((req, res) => {
 //@route PATCH Request api/rssfeeds
 // @descr update a rssfeed using their ID
 // @access Private
-router.route('/').patch(auth, isAdmin, require('./updateRssFeed'));
+router.route('/').patch(require('./updateRssFeed'));
 
 //@route DELETE Request api/rssfeeds
 // @descr delete a rssfeed using their ID

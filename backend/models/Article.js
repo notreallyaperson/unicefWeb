@@ -8,6 +8,10 @@ const articleSchema = new Schema(
 			type: Number,
 			required: true
 		},
+		feedID: {
+			type: String,
+			required: true,
+		},
 		title: {
 			type: String,
 			required: true

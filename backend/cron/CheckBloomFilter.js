@@ -14,7 +14,7 @@ function checkBloomFilter(filter, prefix, urls) {
     }
   })
 
-  filter = filter.saveAsJSON()
+  filter = JSON.stringify(filter.saveAsJSON())
 
   return { filter , checkedUrls }
 }
