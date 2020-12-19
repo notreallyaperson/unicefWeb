@@ -16,6 +16,6 @@ const lamdaSchema = new Schema(
 	}
 );
 
-const Lamda = mongoose.model('articles', lamdaSchema);
+const Lamda = mongoose.model('lambdas', lamdaSchema);
 
 module.exports = Lamda;

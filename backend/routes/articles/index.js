@@ -7,12 +7,12 @@ const Article = require('../../models/Article');
 // @route POST api/articles
 // Create Article
 // public access
-router.route('/').post(auth, isAdmin, require('./addArticle'));
+router.route('/').post(require('./addArticle'));
 
 //@route GET Request api/articles
 // @descr GET All articles
 // @access Private
-router.route('/').get(auth, isAdmin, (req, res) => {
+router.route('/').get((req, res) => {
     Article.find()
         .select('-password')
         .then((articles) => res.json(articles))

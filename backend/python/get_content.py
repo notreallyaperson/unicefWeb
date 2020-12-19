@@ -11,8 +11,9 @@ import sys
 import ast
 
 def main():
-    urls = ast.literal_eval(str(sys.argv[1]))
-    return [ lib.download_article(url) for url in urls]
+    url = ast.literal_eval(sys.argv[1])
+    return lib.download_article(url)
 
 if (__name__ == "__main__"):
-    print(str(list(main())))
+    print(str(main()))
+    sys.stdout.flush()

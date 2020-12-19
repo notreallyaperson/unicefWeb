@@ -4,16 +4,22 @@ const Schema = mongoose.Schema;
 
 const articleSchema = new Schema(
 	{
-		// _id: {
-		// 	type: Int32Array
-		// },
+		_id: {
+			type: Number,
+			required: true
+		},
 		title: {
 			type: String,
+			required: true
 		},
 		url: {
 			type: String,
+			required: true
 		},
 		date: {
+			type: Date,
+		},
+		dateParsed: {
 			type: Date,
 		},
 		content: {

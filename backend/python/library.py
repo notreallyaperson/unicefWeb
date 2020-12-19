@@ -19,7 +19,7 @@ def download_article(url):
         article.parse()
         return article.text
     except:
-        return None
+        raise Exception("Error: Invalid url.")
 
 # Preparing the raw text of a document for the algorithm (removing stopwords and unwanted characters)
 # function of type string -> string

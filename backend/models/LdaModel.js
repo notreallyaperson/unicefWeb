@@ -8,25 +8,25 @@ const parameterSchema = new Schema(
     {
         vocabulary: [], // start of at about 7000 words
         length: {
-            type: Int32Array
+            type: Number
         },
         sizeOfCorpus: {
-            type: Int32Array
+            type: Number
         },
         sizeOfBatch: {
-            type: Int32Array
+            type: Number
         },
         iteration: {
-            type: Int32Array
+            type: Number
         },
         lamdaId: {
             type: String
         },
         startPoint: {
-            type: Int32Array
+            type: Number
         },
-        articleCount: {
-            type: Int32Array
+        endPoint: {
+            type: Number
         }
     },
     {
@@ -34,6 +34,6 @@ const parameterSchema = new Schema(
     }
 );
 
-const LdaModel = mongoose.model('articles', parameterSchema);
+const LdaModel = mongoose.model('ldamodels', parameterSchema);
 
 module.exports = LdaModel;
