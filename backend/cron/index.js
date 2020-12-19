@@ -25,15 +25,17 @@ const getTotalArticles = require('./GetTotalArticles')
 axios.get('http://localhost:5000/api/rssfeeds')
   .then( res => {
 
-    // filter out timestamps
-    rssFeeds = res.data.slice(0,1).map( obj => {
+    var totalArticles = getTotalArticles(res.data);
+    console.log(totalArticles)
+
+    // filter out timestamps and reduce number of feeds
+    rssFeeds = res.data.slice(7,8).map( obj => {
       delete obj.createdAt;
       delete obj.updatedAt;
       delete obj.__v;
       return obj
     })
 
-    var totalArticles = getTotalArticles(rssFeeds);
 
     // get articles and updated feed details from urls
     processFeeds(rssFeeds.map(obj => obj._id ))
@@ -44,7 +46,7 @@ axios.get('http://localhost:5000/api/rssfeeds')
         rssFeeds = rssFeeds.filter((value, index, arr) => processedFeeds[index] != null);
         processedFeeds = processedFeeds.filter((value, index, arr) => processedFeeds[index] != null);
 
-        // Update feeds details and upload articles
+        // Update feeds details and upload articles to database
         for (var i=0; i<processedFeeds.length; i++) {
           const { nextFeedAttrs, nextTotalArticles } = updateArticlesDatabase(rssFeeds[i], processedFeeds[i], totalArticles);
           rssFeeds[i] = nextFeedAttrs;
@@ -56,7 +58,15 @@ axios.get('http://localhost:5000/api/rssfeeds')
         }
 
         // update feeds in database
-        updateFeedsDatabase(rssFeeds);
+        updateFeedsDatabase(rssFeeds)
+          .then(res => {
+            // console.log(res)
+          })
+          .catch(err => {
+            console.log(err)
+          });
+
+        console.log(totalArticles);
 
       })
       .catch( err => {
@@ -66,34 +76,6 @@ axios.get('http://localhost:5000/api/rssfeeds')
   .catch( err => {
     console.log(err)
   })
-//
-// processFeeds(feeds).then(res => {
-//   var count = 0;
-//   res.forEach(feed => {
-//
-//     // findById using feed url
-//
-//
-//     count = count + feed.articles.length;
-//     // feed.articles.forEach( article => {
-//     // });
-//   });
-//   console.log(count)
-// });
-//
-
-
-
-// Filter out the articles that have already been added based on url (check bloom filter)
-
-
-// Get the content of the articles
-
-
-// remove the urls of the articles that failed to get content
-
-
-// Add the articles to mongoDB
 
 
 // Train the current LDA model

@@ -1,13 +1,8 @@
-const axios = require('axios');
+const updateFeed = require('./UpdateFeed')
 
-function updateFeedsDatabase(rssFeedAttrs) {
-  axios.patch('http://localhost:5000/api/rssfeed', rssFeedAttrs)
-    .then( res => {
-      console.log(res)
-    }).catch( err => {
-      console.log(err)
-    })
-  // TODO !!! add error handling for this promise
+function updateFeedsDatabase(rssFeedsAttrs) {
+  const promises = rssFeedsAttrs.map( rssFeedAttrs => updateFeed(rssFeedAttrs))
+  return Promise.all(promises)
 }
 
 module.exports = updateFeedsDatabase

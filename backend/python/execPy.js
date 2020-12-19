@@ -26,16 +26,3 @@ function execPy(script, args) {
 }
 
 module.exports = execPy;
-
-// async function test() {
-//
-//   try {
-//     let article = await execPy('./backend/phyton/get_content.py', 'askjdhasdjh')
-//     console.log(article)
-//   } catch(err) {
-//     console.log(err)
-//   }
-//
-// }
-//
-// test()

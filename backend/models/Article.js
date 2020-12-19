@@ -8,7 +8,7 @@ const articleSchema = new Schema(
 			type: Number,
 			required: true
 		},
-		feedID: {
+		feedId: {
 			type: String,
 			required: true,
 		},
@@ -28,6 +28,7 @@ const articleSchema = new Schema(
 		},
 		content: {
 			type: String,
+			required: true,
 		},
 		// k=50 we will have an array of 50 parameter values
 		gamma: [{
