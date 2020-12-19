@@ -8,7 +8,7 @@ function updateArticlesDatabase(prevFeedAttrs, processedFeed, totalArticles) {
 
   var articles = processedFeed.articles;
   var articlesUrls = processedFeed.articles.map( article => article.link);
-  var newSitePrefix = getSitePrefix(articlesUrls)
+  var newSitePrefix = getSitePrefix(articlesUrls);
 
   // check prefix
   if ('urlPrefix' in prevFeedAttrs) {
@@ -23,6 +23,7 @@ function updateArticlesDatabase(prevFeedAttrs, processedFeed, totalArticles) {
 
   // initialise bloom fliter
   if (!('bloomFilter' in prevFeedAttrs)) {
+    // TODO !!!: Definitely save as an object
     prevFeedAttrs['bloomFilter'] = JSON.stringify(BloomFilter.create(1000, 0.001).saveAsJSON())
   }
 

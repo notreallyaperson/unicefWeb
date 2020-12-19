@@ -1,7 +1,6 @@
 const { BloomFilter } = require('bloom-filters');
 
 function checkBloomFilter(filter, prefix, urls) {
-  // assuming the prefix stayed the same
   filter = BloomFilter.fromJSON(JSON.parse(filter));
 
   checkedUrls = urls.map(url => {

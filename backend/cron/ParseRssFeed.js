@@ -1,8 +1,8 @@
 const Parser = require('rss-parser');
 
 
-// Parse the rss feed url to get the feed details and articles 
-async function parseFeed(url) {
+// Parse the rss feed url to get the feed details and articles
+async function parseFeed(url, index) {
 
   let parser = new Parser();
 

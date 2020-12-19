@@ -26,9 +26,9 @@ axios.get('http://localhost:5000/api/rssfeeds')
   .then( res => {
 
     var totalArticles = getTotalArticles(res.data);
-    console.log(totalArticles)
 
     // filter out timestamps and reduce number of feeds
+    // TODO change get request to pull speciic attributes
     rssFeeds = res.data.slice(7,8).map( obj => {
       delete obj.createdAt;
       delete obj.updatedAt;
@@ -41,6 +41,7 @@ axios.get('http://localhost:5000/api/rssfeeds')
     processFeeds(rssFeeds.map(obj => obj._id ))
       .then( processedFeeds => {
 
+        // TODO !!!: combine to one loop
         // map element to null if breaking condition met and filter out the nulls
         processedFeeds = testBreakingConditions(processedFeeds);
         rssFeeds = rssFeeds.filter((value, index, arr) => processedFeeds[index] != null);
