@@ -1,0 +1,14 @@
+.deleteButton{
+    color: red;
+    cursor: pointer;
+}
+
+.editButton {
+    color: blue;
+    cursor: pointer;
+}
+
+.infoButton {
+    color: black;
+    cursor: pointer;
+}
