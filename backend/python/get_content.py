@@ -6,13 +6,26 @@ Error: If there is an error with a url it will return type None instead of the a
 '''
 
 
-import library as lib
+import newspaper
 import sys
 import ast
 
+# Getting article information from url using newspaper package
+# function of type string -> string
+# error catch returns None when not a valid url
+def download_article(url):
+    try:
+        article = newspaper.Article(url)
+        article.download()
+        article.parse()
+        return article.text
+    except:
+        raise Exception("Error: Invalid url.")
+
+
 def main():
     url = ast.literal_eval(sys.argv[1])
-    return lib.download_article(url)
+    return download_article(url)
 
 if (__name__ == "__main__"):
     print(str(main()))

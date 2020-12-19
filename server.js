@@ -21,7 +21,7 @@ mongoose
     .then(() => {
 
         // Running Express
-        app.use(express.json());
+        app.use(express.json({limit: '5mb'}));
 
         // Get routes to manipulate mongoDB (Database)
         require("./backend/routes")(app)
@@ -50,7 +50,7 @@ mongoose
                 console.log(`child process close all stdio with code ${code}`);
                 // send data to browser
                 console.log(dataToSend)
-                
+
                 res.send(dataToSend)
             });
         })
