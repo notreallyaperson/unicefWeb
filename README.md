@@ -109,7 +109,7 @@ Market Research
 
 ------------------------
 ## Topic Modelling (Latent Dirichlet Allocation)
-----------------------
+
 This project relies on the use of an unsupervised learning task, known as Topic Modelling. In particular, we use the LDA model coupled with the findings in [Hoffman et al 2013] to extend it to massive datasets.
 
 Topic modelling has the goal of grouping words of the same topic without the need for pre-labelling data. his means that massive datasets can be easily prepared for topic modelling.  This has the caveat that,  once words are grouped,  the label of the group (topic) needs to be manually assigned; most of the time, this is fairly straightforward.
@@ -127,3 +127,8 @@ For K topics, a vocabulary of size V and a corpus with D documents/articles, the
   - For each word of the document n_d ∈ {1,...,N_d},
     - sample a topic assignment z_{d,n} ∼ Cat(θ_d), then
     - sample a word w_{d,n} ∼ Cat(β_ {z_{d,n}}).
+
+---------------
+### References
+
+Hoffman, M.D., Blei, D.M., Wang, C. and Paisley, J., 2013. Stochastic variational inference. The Journal of Machine Learning Research, 14(1), pp.1303-1347.
