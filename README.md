@@ -118,7 +118,7 @@ The nuances of language and required detailed knowledge of an article's context 
 
 Latent Dirichlet Allocation (LDA) is one such topic model.  The overall assumptions of the model are that for a fixed vocabulary and pre-determined number of topics, each topic asserts a different distribution of words over the vocabulary. For example, words like law, legal and legislation are more probable under the topic corresponding to politics than they are under the topic corresponding to economics.  This is not to say that it is impossible for the word ‘legislation’ to be drawn from a topic assignment corresponding to economics, it is just very improbable.  Furthermore, the model assumes that within the corpus, each word of each document has some topic assignment which follows the proportion of topics assigned to the document; therefore, if a document is made up of three topics with equal proportions, the topic assignment of the words that make up the document would reflect that.
 
-For K topics, a vocabulary of size V and a corpus with D documents/articles, the LDA model has the following [graphical model representation](README_contents/LDA-Graphical-Model.png) where its assumptions are best given by the following [generative model](README_contents/LDA-Generative-Model.png).
+For K topics, a vocabulary of size V and a corpus with D documents/articles, the LDA model has the following [graphical model representation](README_contents/LDA-Graphical-Model.png) where its assumptions are best given by its corresponding [generative model](README_contents/LDA-Generative-Model.png).
 
 ---------------
 ### References
