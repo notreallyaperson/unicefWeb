@@ -39,7 +39,7 @@ We are constantly running tests to understand our model and results better. The 
 In gathering the data, we have recently had great technical improvements with a fully automated adding of recent articles to the database (currently limited by our compute power and storage capacity) which will improve our testing capabilities in the near future.
 
 
-#### The Milestones over 12 Months:
+#### The Milestones for 12 Months:
 
 1. Improve machine learning algorithm to get large and more accurate category sets
 2. UI/UX to improve accessibility and encourage use
@@ -83,7 +83,7 @@ Market Research
  - UI/UX design
  - React Site creation
 
-Total budget: US$40000
+Total budget for 12 months: US$40000
 
  #### The Team:
 
