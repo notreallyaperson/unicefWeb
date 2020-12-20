@@ -52,37 +52,38 @@ In gathering the data, we have recently had great technical improvements with a 
 #### The Estimated Budget:
 We will assign the budget allocation for each milestone:
 
-1. (Budget Allocation: 15000) Improve machine learning algorithm to get large and more accurate category sets
+1. (Budget Allocation: US$15000) Improve machine learning algorithm to get large and more accurate category sets
  - Testing Alternative models
  - Analysing model outputs
  - Improving algorithm logic
 
 
-2. (Budget Allocation: 5000) UI/UX to improve accessibility and encourage use
+2. (Budget Allocation: US$5000) UI/UX to improve accessibility and encourage use
 Market Research
  - Asset Creation
  - App Design
 
 
-3. (Budget Allocation: 5000) Create frontend website
+3. (Budget Allocation: US$5000) Create frontend website
  - Implementing designs in react
  - Creating backend APIs to access the backend data
 
 
-4. (Budget Allocation: 5000) Add trigger warning capabilities to potentially harmful content
+4. (Budget Allocation: US$5000) Add trigger warning capabilities to potentially harmful content
  - UI/UX design
  - React Site creation
 
 
-5. (Budget Allocation: 5000) Create safe space mode to remove all potentially harmful content
+5. (Budget Allocation: US$5000) Create safe space mode to remove all potentially harmful content
  - UI/UX design
  - React Site creation
 
 
-6. (Budget Allocation: 5000) Create feature to prompt users when accessing large quantities of potentially harmful content - chatbot
+6. (Budget Allocation: US$5000) Create feature to prompt users when accessing large quantities of potentially harmful content - chatbot
  - UI/UX design
  - React Site creation
 
+Total budget: US$40000
 
  #### The Team:
 
