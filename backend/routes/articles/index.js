@@ -19,6 +19,15 @@ router.route('/').get((req, res) => {
         .catch((err) => res.status(400).json('Error: ' + err));
 });
 
+//@route GET Request api/articles
+// @descr GET All articles which flagged an error
+// @access Private
+router.route('/noContent').get((req, res) => {
+    Article.find( { noContentFlag: true } )
+        .select('-password')
+        .then((articles) => res.json(articles))
+        .catch((err) => res.status(400).json('Error: ' + err));
+});
 
 //@route GET Request api/articles/total
 // @descr GET total articles === largest _id +1
@@ -45,25 +54,25 @@ router.route('/').patch(auth, isAdmin, require('./updateArticle'));
 //@route DELETE Request api/articles
 // @descr delete a article using their ID
 // @access Private
-router.route('/:id').delete(auth, isAdmin, (req, res) => {
-    Article.findByIdAndDelete(req.params.id)
-        .then(() => res.json({ message: 'Deleted Successfully' }))
-        .catch((err) => res.status(400).json('Error: ' + err));
-});
+// router.route('/:id').delete(auth, isAdmin, (req, res) => {
+//     Article.findByIdAndDelete(req.params.id)
+//         .then(() => res.json({ message: 'Deleted Successfully' }))
+//         .catch((err) => res.status(400).json('Error: ' + err));
+// });
 
 //@route DELETE Request api/articles/all
 // @descr delete all articles
 // @access Private
-// router.route('/all').delete((req, res) => {
-//     Article.deleteMany({})
-//         .then(() => res.json({ message: 'Deleted All Successfully' }))
-//         .catch((err) => res.status(400).json('Error: ' + err));
-// });
+router.route('/all').delete((req, res) => {
+    Article.deleteMany({})
+        .then(() => res.json({ message: 'Deleted All Successfully' }))
+        .catch((err) => res.status(400).json('Error: ' + err));
+});
 
 //@route GET Request api/articles
 // @descr find a article using their ID
 // @access Private
-router.route('/:id').get(auth, (req, res) => {
+router.route('/:id').get((req, res) => {
     Article.findById(req.params.id)
         .select('-password')
         .then((article) => res.json(article))

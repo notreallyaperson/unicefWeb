@@ -131,6 +131,7 @@ async function parseRssFeed(rssFeed, totalArticles) {
                           };
             if (!(content.length > 0)) {
               newArticle['noContentFlag'] = true;
+              newArticle['content'] = '';
             }
             return axios.post('http://localhost:5000/api/articles', newArticle)
             .then( res => {
@@ -142,14 +143,60 @@ async function parseRssFeed(rssFeed, totalArticles) {
               rssFeed['numberOfFailedArticles'] += 1;
               totalArticles['failed'] += 1;   // purely for the metrics
               console.error("Error! Failed to post the following article to the mongoDB database:",  articleUrl, err.response.data);
-              return null;
+              return axios.post('http://localhost:5000/api/articles', {
+                                                                        _id: idOffset,
+                                                                        feedId: rssFeed._id,
+                                                                        url: articleUrl,
+                                                                        dateParsed: new Date().toISOString(),
+                                                                        content: '',
+                                                                        noContentFlag: true,
+                                                                        logs: [ {  axiosArticlePostFailed: err.response.data,
+                                                                                    date: new Date().toISOString()
+                                                                                  } ],
+                                                                      })
+                        .then( res => {
+                          console.log("Error logged for the following article url", articleUrl);
+                          return null;
+                        })
+                        .catch( err => {
+                          console.log("Failed to log the error for the following article url:", articleUrl);
+                          rssFeed.logs.push({  articleUrl: articleUrl,
+                                                axiosArticlePostErrorLoggingFailed: err.response.data,
+                                                date: new Date().toISOString()
+                                              });
+                          return null;
+                        });;
             });
           })
           .catch( err => {
             rssFeed['numberOfFailedArticles'] += 1;
             totalArticles['failed'] += 1;    // purely for the metrics
             console.error("Error! Failed to parse content from the following article url:", articleUrl, err);
-            return null;
+            return axios.post('http://localhost:5000/api/articles', {
+                                                                      _id: idOffset,
+                                                                      feedId: rssFeed._id,
+                                                                      title: article.title,
+                                                                      url: articleUrl,
+                                                                      date: getDate(article),
+                                                                      dateParsed: new Date().toISOString(),
+                                                                      content: '',
+                                                                      noContentFlag: true,
+                                                                      logs: [ { getContentFailed: err,
+                                                                                date: new Date().toISOString()
+                                                                              } ],
+                                                                    })
+                      .then( res => {
+                        console.log("Error logged for the following article url", articleUrl);
+                        return null;
+                      })
+                      .catch( err => {
+                        console.log("Failed to log the error for the following article url:", articleUrl);
+                        rssFeed.logs.push({  articleUrl: articleUrl,
+                                              getContentErrorLoggingFailed: err.response.data,
+                                              date: new Date().toISOString()
+                                            });
+                        return null;
+                      });
           });
         } else {
           console.log("The following article has already been added:", articleUrl);
@@ -159,6 +206,7 @@ async function parseRssFeed(rssFeed, totalArticles) {
       });
       return Promise.all(promises)
         .then( res => {
+          console.log( "Articles added:", res )
           return axios.patch('http://localhost:5000/api/rssfeeds', rssFeed)       // update mongoDB rssfeed database
           .then( res => {
             console.log("Success! The following rss feed has been updated in mongoDB:", rssFeed.feedUrl);
@@ -166,17 +214,22 @@ async function parseRssFeed(rssFeed, totalArticles) {
           })
           .catch( err => {
             // TODO!!!: Handle this error better and remove added articles cause the rssfeeds database and the articles database would be out of sync otherwise (not urgent!)
+            // Will probably just find all articles by url and delete from the database
             console.error('Error! The following rss feed has failed to update in mongoDB:', rssFeed.feedUrl, err.response.data);
             return null
           });
         })
-        .catch( err =>{
-
+        .catch( err => {
+          // TODO!!!: Handle this error better and remove added articles cause the rssfeeds database and the articles database would be out of sync otherwise (not urgent!)
+          // Will probably just find all articles by url and delete from the database
+          console.error('Error! The promises to add articles were not successfully fulfilled for the rss feed:', rssFeed.feedUrl, err );
+          return null
         });
       // return true;
     } else {
       // TODO !!!: Handle how to deal with database entry when no articles, maybe flag the error in the rssfeed database somehow
-      console.error("Error! No articles returned from rss parser for the following feed:", rssFeed.feedUrl);
+      // Maybe create a database purely for logs and put all errors there TODO !!!  IDEA!!!.
+      console.log("Warning! No articles returned from rss parser for the following feed:", rssFeed.feedUrl);
       return null;
     }
 

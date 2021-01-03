@@ -47,7 +47,8 @@ const rssFeedSchema = new Schema(
 		},
 		icon: {
 			type: String,
-		}
+		},
+		logs: [],
 	},
 	{
 		timestamps: true,

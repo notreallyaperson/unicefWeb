@@ -60,7 +60,6 @@ function runCron() {
   })
 }
 
-
 // Train the current LDA model
 
 module.exports = runCron;

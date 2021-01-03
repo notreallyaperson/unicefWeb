@@ -12,13 +12,12 @@ const articleSchema = new Schema(
 			type: String,
 			required: true,
 		},
-		title: {
-			type: String,
-			required: true
-		},
 		url: {
 			type: String,
 			required: true
+		},
+		title: {
+			type: String,
 		},
 		date: {
 			type: Date,
@@ -28,11 +27,11 @@ const articleSchema = new Schema(
 		},
 		content: {
 			type: String,
-			required: true,
 		},
 		noContentFlag: {
 			type: Boolean,
 		},
+		logs: [],
 		// k=50 we will have an array of 50 parameter values
 		gamma: [{
 			value: [],
