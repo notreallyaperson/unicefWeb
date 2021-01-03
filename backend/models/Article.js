@@ -30,6 +30,9 @@ const articleSchema = new Schema(
 			type: String,
 			required: true,
 		},
+		noContentFlag: {
+			type: Boolean,
+		},
 		// k=50 we will have an array of 50 parameter values
 		gamma: [{
 			value: [],

@@ -1,11 +1,34 @@
 const Parser = require('rss-parser');
 const axios = require('axios');
 const { BloomFilter } = require('bloom-filters');
-const getSitePrefix = require('./GetSitePrefix');
-const getContent = require('./GetContent');
+const execPy = require('../python/execPy')
 
 const bloomFilterSize = 1000;
 const bloomFilterAccuracy = 0.001;
+
+
+function getSitePrefix(urls, shortest=-1) {
+
+  // initialise the longest common prefix to the shortest url
+  // TODO: improve efficiency of finding the min
+  var longest_prefix;
+  if (shortest < 0) {
+    longest_prefix = Math.min(...urls.map( url => url.length ));
+  } else {
+    longest_prefix = shortest;
+  }
+
+  // find the index of the longest prefix
+  for (var i=0; i<urls.length; i++) {
+    for (var j=longest_prefix; j>0; j--){
+      if (urls[i].slice(0,j) == urls[0].slice(0,j)) {
+        longest_prefix = j;
+        break;
+      }
+    }
+  }
+  return urls[0].slice(0, longest_prefix);
+}
 
 function updateRssFeedFields(rssFeed, feed) {
   // update fields if required
@@ -33,19 +56,6 @@ function updateRssFeedFields(rssFeed, feed) {
   }
 }
 
-function getDate(article) {
-  // Check which date attribute is present
-    var articleDate;
-    if ('isoDate' in article) {
-      articleDate = article.isoDate;
-    } else if ('pubDate' in article) {
-      articleDate = new Date (article.pubDate);
-    } else {
-      articleDate = '';
-    }
-    return articleDate;
-}
-
 function updateBloomFilter(rssFeed, url) {
   var filter = BloomFilter.fromJSON(rssFeed.bloomFilter);
   const prefixCheck = getSitePrefix([ rssFeed.urlPrefix, url]);
@@ -71,6 +81,27 @@ function updateBloomFilter(rssFeed, url) {
   return isNew;
 }
 
+async function getContent(url) {
+  var content = await execPy('../python/get_content.py', [url]);
+  if (!(content.length > 0)) {
+    console.log('Warning! The following article url returned no content:', url);
+  }
+  return content;
+}
+
+function getDate(article) {
+  // Check which date attribute is present
+    var articleDate;
+    if ('isoDate' in article) {
+      articleDate = article.isoDate;
+    } else if ('pubDate' in article) {
+      articleDate = article.pubDate;
+    } else {
+      articleDate = '';
+    }
+    return new Date(articleDate).toISOString();
+}
+
 
 // TODO!!!: update rss feed in database after all articles have been parsed (use a map and wait for all promises to complete)
 // Parse the rss feed url to get the feed details and articles
@@ -87,20 +118,23 @@ async function parseRssFeed(rssFeed, totalArticles) {
         const idOffset = totalArticles.value;
         const isNew = updateBloomFilter(rssFeed, articleUrl);   // verify if the url has been added before
         if (isNew) {
-          totalArticles['value'] += 1;
-          totalArticles['added'] += 1;
+          totalArticles['value'] += 1;    // to keep track of the article _id
+          totalArticles['added'] += 1;    // purely for the metrics
           return getContent(articleUrl)
           .then( content => {
-            // TODO !!!: if content is empty or None or null then don't create article
-            return axios.post('http://localhost:5000/api/articles', {
-              _id: idOffset,
-              feedId: rssFeed._id,
-              title: article.title,
-              url: articleUrl,
-              date: getDate(article),
-              dateParsed: new Date().toISOString(),
-              content: content,
-            })
+            var newArticle = {
+                            _id: idOffset,
+                            feedId: rssFeed._id,
+                            title: article.title,
+                            url: articleUrl,
+                            date: getDate(article),
+                            dateParsed: new Date().toISOString(),
+                            content: content,
+                          };
+            if (!(content.length > 0)) {
+              newArticle['noContentFlag'] = true;
+            }
+            return axios.post('http://localhost:5000/api/articles', newArticle)
             .then( res => {
               console.log("Success! The following article has been added to mongoDB:", articleUrl )
               rssFeed['numberOfArticles'] += 1;
@@ -108,14 +142,14 @@ async function parseRssFeed(rssFeed, totalArticles) {
             })
             .catch( err => {
               rssFeed['numberOfFailedArticles'] += 1;
-              totalArticles['failed'] += 1;
-              console.error("Error! Failed to post the following article to the mongoDB database:",  articleUrl, err.response.data );
+              totalArticles['failed'] += 1;   // purely for the metrics
+              console.error("Error! Failed to post the following article to the mongoDB database:",  articleUrl, err.response.data);
               return null;
             });
           })
           .catch( err => {
             rssFeed['numberOfFailedArticles'] += 1;
-            totalArticles['failed'] += 1;
+            totalArticles['failed'] += 1;    // purely for the metrics
             console.error("Error! Failed to parse content from the following article url:", articleUrl, err);
             return null;
           });
@@ -133,7 +167,7 @@ async function parseRssFeed(rssFeed, totalArticles) {
             return true
           })
           .catch( err => {
-            // TODO!!!: Handle this error better and remove added articles cause the rssfeeds database and the articles database would be outo fsync otherwise (not urgent!)
+            // TODO!!!: Handle this error better and remove added articles cause the rssfeeds database and the articles database would be out of sync otherwise (not urgent!)
             console.error('Error! The following rss feed has failed to update in mongoDB:', rssFeed.feedUrl, err.response.data);
             return null
           });
