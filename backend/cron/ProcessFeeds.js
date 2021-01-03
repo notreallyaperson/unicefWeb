@@ -77,7 +77,7 @@ function updateBloomFilter(rssFeed, url) {
 async function parseRssFeed(rssFeed, totalArticles) {
   try {
     console.log("Processing the following feed:", rssFeed.feedUrl );
-    let feed = await new Parser().parseURL(rssFeed.feedUrl);      // parse articles from feed
+    let feed = await new Parser({ timeout:600000, maxRedirects:10 }).parseURL(rssFeed.feedUrl);      // parse articles from feed
     if (feed.items.length > 0) {      // throw error if no articles returned
       console.log("Updating the fields of the following feed:", rssFeed.feedUrl);
       updateRssFeedFields(rssFeed, feed);     // update fields appropriately
@@ -88,6 +88,7 @@ async function parseRssFeed(rssFeed, totalArticles) {
         const isNew = updateBloomFilter(rssFeed, articleUrl);   // verify if the url has been added before
         if (isNew) {
           totalArticles['value'] += 1;
+          totalArticles['added'] += 1;
           return getContent(articleUrl)
           .then( content => {
             // TODO !!!: if content is empty or None or null then don't create article
@@ -107,12 +108,14 @@ async function parseRssFeed(rssFeed, totalArticles) {
             })
             .catch( err => {
               rssFeed['numberOfFailedArticles'] += 1;
+              totalArticles['failed'] += 1;
               console.error("Error! Failed to post the following article to the mongoDB database:",  articleUrl, err.response.data );
               return null;
             });
           })
           .catch( err => {
             rssFeed['numberOfFailedArticles'] += 1;
+            totalArticles['failed'] += 1;
             console.error("Error! Failed to parse content from the following article url:", articleUrl, err);
             return null;
           });

@@ -25,8 +25,10 @@ axios.get('http://localhost:5000/api/rssfeeds')
     // get total number of articles (tracked by the _id + 1)
     axios.get('http://localhost:5000/api/articles/total')
       .then( totalArticles => {
-        totalArticles = totalArticles.data
-        rssFeeds = rssFeeds.data.slice(0,3)   // reduce number of feeds
+        totalArticles = totalArticles.data;
+        totalArticles['added'] = 0;
+        totalArticles['failed'] = 0;
+        rssFeeds = rssFeeds.data.slice(0,)   // reduce number of feeds
         console.log(rssFeeds)
         // get articles and update feed details
         processFeeds(rssFeeds, totalArticles)

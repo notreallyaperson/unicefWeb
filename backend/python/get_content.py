@@ -15,7 +15,10 @@ import ast
 # error catch returns None when not a valid url
 def download_article(url):
     try:
-        article = newspaper.Article(url)
+        user_agent = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36'
+        config = newspaper.Config()
+        config.browser_user_agent = user_agent
+        article = newspaper.Article(url, config=config)
         article.download()
         article.parse()
         return article.text
@@ -24,7 +27,9 @@ def download_article(url):
 
 
 def main():
-    url = ast.literal_eval(sys.argv[1])
+    url = ast.literal_eval(sys.argv[1]) # input is an array strings with 1 entry
+    url = url[0]
+    print (url)
     return download_article(url)
 
 if (__name__ == "__main__"):

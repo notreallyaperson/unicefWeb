@@ -14,7 +14,7 @@ router.route('/').post(require('./addRssFeed'));
 // @access Private
 router.route('/').get((req, res) => {
     RssFeed.find()
-        .select('-password')
+        .select('-createdAt -updatedAt -__v')
         .then((rssfeeds) => res.json(rssfeeds))
         .catch((err) => res.status(400).json('Error: ' + err));
 });
@@ -27,9 +27,18 @@ router.route('/').patch(require('./updateRssFeed'));
 //@route DELETE Request api/rssfeeds
 // @descr delete a rssfeed using their ID
 // @access Private
-router.route('/:id').delete(auth, isAdmin, (req, res) => {
-    RssFeed.findByIdAndDelete(req.params.id)
-        .then(() => res.json({ message: 'Deleted Successfully' }))
+// router.route('/:id').delete(auth, isAdmin, (req, res) => {
+//     RssFeed.findByIdAndDelete(req.params.id)
+//         .then(() => res.json({ message: 'Deleted Successfully' }))
+//         .catch((err) => res.status(400).json('Error: ' + err));
+// });
+
+//@route DELETE Request api/rssfeeds/all
+// @descr delete all rssfeeds
+// @access Private
+router.route('/all').delete((req, res) => {
+    RssFeed.deleteMany({})
+        .then(() => res.json({ message: 'Deleted All Successfully' }))
         .catch((err) => res.status(400).json('Error: ' + err));
 });
 

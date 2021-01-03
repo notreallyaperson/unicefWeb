@@ -19,6 +19,24 @@ router.route('/').get((req, res) => {
         .catch((err) => res.status(400).json('Error: ' + err));
 });
 
+
+//@route GET Request api/articles/total
+// @descr GET total articles === largest _id +1
+// @access Private
+router.route('/total').get((req, res) => {
+    Article.findOne()
+        .sort({ _id: -1 })
+        .select('_id')
+        .then((article) => {
+          if (article) {
+            res.json( { value: article._id + 1 } );
+          } else {
+            res.json( { value: 0 } );
+          }
+        })
+        .catch((err) => res.status(400).json('Error: ' + err));
+});
+
 //@route PATCH Request api/articles
 // @descr update a article using their ID
 // @access Private
@@ -27,9 +45,18 @@ router.route('/').patch(auth, isAdmin, require('./updateArticle'));
 //@route DELETE Request api/articles
 // @descr delete a article using their ID
 // @access Private
-router.route('/:id').delete(auth, isAdmin, (req, res) => {
-    Article.findByIdAndDelete(req.params.id)
-        .then(() => res.json({ message: 'Deleted Successfully' }))
+// router.route('/:id').delete(auth, isAdmin, (req, res) => {
+//     Article.findByIdAndDelete(req.params.id)
+//         .then(() => res.json({ message: 'Deleted Successfully' }))
+//         .catch((err) => res.status(400).json('Error: ' + err));
+// });
+
+//@route DELETE Request api/articles/all
+// @descr delete all articles
+// @access Private
+router.route('/all').delete((req, res) => {
+    Article.deleteMany({})
+        .then(() => res.json({ message: 'Deleted All Successfully' }))
         .catch((err) => res.status(400).json('Error: ' + err));
 });
 

@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 
 const rssFeedSchema = new Schema(
 	{
-		_id: { // this will be the feeds url http
+		feedUrl: { // this will be the feeds url http
 			type: String,
 			required: true,
 		},
@@ -12,12 +12,13 @@ const rssFeedSchema = new Schema(
 			type: Number,
 			default: 0,
 		},
+		numberOfFailedArticles: {
+			type: Number,
+			default: 0,
+		},
 		title: {
 			type: String,
 		},
-		// feedUrl: {
-		// 	type: String,
-		// },
 		siteUrl: {
 			type: String,
 		},
@@ -25,14 +26,34 @@ const rssFeedSchema = new Schema(
 			type: String,
 		},
 		bloomFilter: {
-			type: String,
+			type: {
+				type: String
+			},
+			_size: {
+				type: Number
+			},
+			_nbHashes: {
+				type: Number
+			},
+			_filter: {
+				type: []
+			},
+			_length: {
+				type: Number
+			},
+			_seed: {
+				type: Number
+			}
 		},
+		icon: {
+			type: String,
+		}
 	},
 	{
 		timestamps: true,
 	}
 );
 
-const RssFeed = mongoose.model('rssfeeds', rssFeedSchema);
+const RssFeed = mongoose.model('rssfeeds2', rssFeedSchema);
 
 module.exports = RssFeed;
