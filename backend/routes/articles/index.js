@@ -45,20 +45,20 @@ router.route('/').patch(auth, isAdmin, require('./updateArticle'));
 //@route DELETE Request api/articles
 // @descr delete a article using their ID
 // @access Private
-// router.route('/:id').delete(auth, isAdmin, (req, res) => {
-//     Article.findByIdAndDelete(req.params.id)
-//         .then(() => res.json({ message: 'Deleted Successfully' }))
-//         .catch((err) => res.status(400).json('Error: ' + err));
-// });
+router.route('/:id').delete(auth, isAdmin, (req, res) => {
+    Article.findByIdAndDelete(req.params.id)
+        .then(() => res.json({ message: 'Deleted Successfully' }))
+        .catch((err) => res.status(400).json('Error: ' + err));
+});
 
 //@route DELETE Request api/articles/all
 // @descr delete all articles
 // @access Private
-router.route('/all').delete((req, res) => {
-    Article.deleteMany({})
-        .then(() => res.json({ message: 'Deleted All Successfully' }))
-        .catch((err) => res.status(400).json('Error: ' + err));
-});
+// router.route('/all').delete((req, res) => {
+//     Article.deleteMany({})
+//         .then(() => res.json({ message: 'Deleted All Successfully' }))
+//         .catch((err) => res.status(400).json('Error: ' + err));
+// });
 
 //@route GET Request api/articles
 // @descr find a article using their ID
