@@ -82,10 +82,8 @@ function updateBloomFilter(rssFeed, url) {
 }
 
 async function getContent(url) {
-  var content = await execPy('../python/get_content.py', [url]);
-  if (!(content.length > 0)) {
-    console.log('Warning! The following article url returned no content:', url);
-  }
+  // note that this has to be relative to the server (or dir the file was called from)
+  var content = await execPy('./backend/python/get_content.py', [url]);
   return content;
 }
 
