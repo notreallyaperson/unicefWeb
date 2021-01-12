@@ -154,7 +154,7 @@ async function parseRssFeed(rssFeed, totalArticles) {
             totalArticles['added'] += 1;    // purely for the metrics
             return getContent(articleUrl)
             .then( content => {
-              var articleNoContentFlag false;
+              var articleNoContentFlag = false;
               if (!(content.length > 0)) {
                 articleNoContentFlag = true;
                 content = '';
@@ -192,7 +192,7 @@ async function parseRssFeed(rssFeed, totalArticles) {
                 })
                 .then(res => {
                   return null;
-                )
+                })
                 .catch( err => {
                   console.log("Failed to log the error for the following article url:", articleUrl);
                   rssFeed.logs.push({  articleUrl: articleUrl,
@@ -220,7 +220,7 @@ async function parseRssFeed(rssFeed, totalArticles) {
               })
               .then(res => {
                 return null;
-              )
+              })
               .catch( err => {
                 console.log("Failed to log the error for the following article url:", articleUrl);
                 rssFeed.logs.push({  articleUrl: articleUrl,
