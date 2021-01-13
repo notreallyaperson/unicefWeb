@@ -13,7 +13,7 @@ router.route('/').post(require('./addLog'));
 // @descr GET All Logs
 // @access Private
 router.route('/').get((req, res) => {
-    Article.find()
+    Log.find()
         .then((logs) => res.json(logs))
         .catch((err) => res.status(400).json('Error: ' + err));
 });
@@ -22,7 +22,7 @@ router.route('/').get((req, res) => {
 // @descr GET All logs with the queried type
 // @access Private
 router.route('/type/:query').get((req, res) => {
-    Article.find( { type: req.params.query } )
+    Log.find( { type: req.params.query } )
         .then((logs) => res.json(logs))
         .catch((err) => res.status(400).json('Error: ' + err));
 });
@@ -31,9 +31,18 @@ router.route('/type/:query').get((req, res) => {
 // @descr find a log using its ID
 // @access Private
 router.route('/id/:id').get((req, res) => {
-    Article.findById(req.params.id)
+    Log.findById(req.params.id)
         .select('-password')
-        .then((article) => res.json(article))
+        .then((log) => res.json(article))
+        .catch((err) => res.status(400).json('Error: ' + err));
+});
+
+//@route DELETE Request api/logs/all
+// @descr delete all logs
+// @access Private
+router.route('/all').delete((req, res) => {
+    Log.deleteMany({})
+        .then(() => res.json({ message: 'Deleted All Successfully' }))
         .catch((err) => res.status(400).json('Error: ' + err));
 });
 

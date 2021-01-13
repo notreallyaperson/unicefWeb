@@ -9,6 +9,9 @@ const runCron = require('../../cron');
 // public access
 router.route('/').get((req, res) => {
   runCron().then( response => {
+    console.log('------------------------------------------------------------')
+    console.log('                       CRON COMPLETED                       ')
+    console.log('------------------------------------------------------------')
     console.log(response)
     res.json(response);
   });

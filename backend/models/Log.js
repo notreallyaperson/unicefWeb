@@ -6,12 +6,21 @@ const Schema = mongoose.Schema;
 const logSchema = new Schema(
 	{
 		type: {
-				type: String,
-				enum: ['article', 'lambda', 'ldaModel', 'rssFeed', 'user', 'other'],
-				required: true,
+			type: String,
+			enum: ['article', 'lambda', 'ldaModel', 'rssFeed', 'user', 'other'],
+			required: true,
+		},
+		isWarning: {
+			type: Boolean,
+		},
+		isError: {
+			type: Boolean,
+		},
+		noContent: {
+			type: Boolean
 		},
 		message: {
-			type: String
+			type: String,
 		},
 		details: {},
 		reviewed: {

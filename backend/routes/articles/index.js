@@ -15,6 +15,7 @@ router.route('/').post(require('./addArticle'));
 router.route('/').get((req, res) => {
     Article.find()
         .select('-password')
+        .sort({ _id: -1 })
         .then((articles) => res.json(articles))
         .catch((err) => res.status(400).json('Error: ' + err));
 });

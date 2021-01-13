@@ -4,7 +4,7 @@ module.exports = (req, res) => {
     const newLog = new Log({
         ...req.body
     });
-    newArticle
+    newLog
         .save()
         .then((log) => {
             res.json(log)

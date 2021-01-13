@@ -14,16 +14,18 @@ const articleSchema = new Schema(
 		},
 		url: {
 			type: String,
-			required: true
+			required: true,
 		},
 		title: {
 			type: String,
+			required: true,
 		},
 		date: {
 			type: Date,
 		},
 		dateParsed: {
 			type: Date,
+			required: true,
 		},
 		content: {
 			type: String,

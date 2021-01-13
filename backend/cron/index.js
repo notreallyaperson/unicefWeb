@@ -1,5 +1,5 @@
 const axios = require('axios');
-const processFeeds = require('./ProcessFeeds');
+const { asyncProcessFeeds, syncProcessFeeds } = require('./ProcessFeeds');
 
 // Store/Delete RSS Feeds in mongoDB
 
@@ -35,7 +35,7 @@ function runCron() {
       rssFeeds = rssFeeds.data.slice(0,)   // reduce number of feeds
       console.log(rssFeeds)
       // get articles and update feed details
-      return processFeeds(rssFeeds, totalArticles)
+      return syncProcessFeeds(rssFeeds, totalArticles)
       .then( res => {
         return {
                   feedsProcessed: res,
@@ -59,6 +59,16 @@ function runCron() {
     return { Error: err }
   })
 }
+
+// // Testing Parser
+// const Parser = require('rss-parser');
+//
+// new Parser({ timeout:600000, maxRedirects:10 }).parseURL("http://rss.time.com/web/time/rss/top/index.xml").then( res => {
+//   console.log(res)
+// }).catch( err => {
+//   console.log(err)
+// });      // parse articles from feed
+
 
 // Train the current LDA model
 
