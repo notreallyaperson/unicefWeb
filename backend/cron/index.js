@@ -40,7 +40,7 @@ function runCron() {
         return {
                   feedsProcessed: res,
                   totalArticles: totalArticles,
-                  timeTaken: (Date.now() - start).toString() + 'ms'
+                  timeTaken: (Math.round((Date.now() - start)/600)/100).toString() + ' min(s)'
                 }
       })
       .catch( err => {
