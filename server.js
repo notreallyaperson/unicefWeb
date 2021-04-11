@@ -1,13 +1,13 @@
-const config = require('config')
 const mongoose = require("mongoose")
 const path = require('path');
 const spawn = require('child_process').spawn
+require('dotenv').config()
 
 const express = require('express');
 const app = express()
 
 //connect to MongoDB
-const db = config.get('mongoURI');
+const db = process.env.mongoURI;
 mongoose
     .connect(
         db,
@@ -21,7 +21,7 @@ mongoose
     .then(() => {
 
         // Running Express
-        app.use(express.json({limit: '5mb'}));
+        app.use(express.json({ limit: '5mb' }));
 
         // Get routes to manipulate mongoDB (Database)
         require("./backend/routes")(app)

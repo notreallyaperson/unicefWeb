@@ -1,6 +1,5 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const config = require('config');
 const User = require('../../models/User');
 
 module.exports = (req, res) => {
@@ -40,7 +39,7 @@ module.exports = (req, res) => {
                                     permissionLevel: user.permissionLevel,
                                     status: user.status,
                                 },
-                                config.get('jwtSecret'),
+                                process.env.jwtSecret,
                                 { expiresIn: 7200 },
                                 (err, token) => {
                                     if (err) throw err;
