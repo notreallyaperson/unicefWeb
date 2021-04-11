@@ -53,7 +53,7 @@ router.route('/total').get((req, res) => {
 router.route('/1000/:id').get((req, res) => {
   Article.find({_id : {$lt: req.params.id}})
       .sort({ _id: -1 })
-      .select('_id title content')
+      .select('_id title content feedId dateParsed')
       .limit(1000)
       .then((articles) => {
         if (articles) {
