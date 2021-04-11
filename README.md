@@ -20,7 +20,7 @@ In the long run, we are thinking about using the collected data in order to acco
 #### The Technologies:
 *(Data Science & Machine Learning)*
 
-We are using a data-driven learning technique to understand the topical information of an extremely large corpus of unlabelled articles or documents. The Latent Dirichlet Allocation (LDA) model is an unsupervised learning model that outputs the topic proportions of each document based on the likelihood that a word of the document belongs to a particular topic. With more data the model learns the assignment of the topics better. Unfortunately, with most learning methods the time to train a model increases exponentially with the size of the corpus. However, in 2013 Hoffman et al developed a scalable learning method for the model which we implement in the context of online safety.
+We are using a data-driven learning technique to understand the topical information of an extremely large corpus of unlabelled articles or documents. The [Latent Dirichlet Allocation](README_contents/LDA-model.pdf) (LDA) model is an unsupervised learning model that outputs the topic proportions of each document based on the likelihood that a word of the document belongs to a particular topic. With more data the model learns the assignment of the topics better. Unfortunately, with most learning methods the time to train a model increases exponentially with the size of the corpus. However, in 2013 Hoffman et al developed a scalable learning method for the model which we implement in the context of online safety.
 
 Combining this with RSS feed technology, we have developed a way to automate the collection of huge numbers of articles and learn the documents’ topics in an efficient and scalable manner without the need for human intervention.
 
@@ -38,8 +38,7 @@ We are constantly running tests to understand our model and results better. The 
 
 In gathering the data, we have recently had great technical improvements with a fully automated adding of recent articles to the database (currently limited by our compute power and storage capacity) which will improve our testing capabilities in the near future.
 
-------------------------------------------
-Latest Prototyping:
+*Latest Prototyping:*
 
 The fully automated article retrieval system has stored over 70,000 articles from various websites with freely available content. This batch job runs around 4 times per week and collects the most recent articles published.
 
@@ -49,8 +48,12 @@ The vocabulary used for training is divided in to [good](http://crr.ugent.be/) a
 
 The algorithm was trained with the prior assumption of the corpus containing 20, 50, 100 & 200 hidden topics. The log predictive likelihood of the test data was used to assess the effectiveness of the algorithm. The results showed that training on [20 topics](README_contents/AttemptA-elbo_logpred-20.png) or [200 topics](README_contents/AttemptA-elbo_logpred-200.png) almost always led to overfitting the test data. Proceeding with [50 topics](README_contents/AttemptA-elbo_logpred-50.png) or [100 topics](README_contents/AttemptA-elbo_logpred-100.png) very often led to an effective algorithm.
 
-Currently, the categories found are a compound of topics and are best represented by showing sets of similar articles: 
-1. 
+Currently, the categories found are a compound of topics and are best represented by showing [sets of similar articles](). For example, using an article related to COVID in the UK, the algorithm is able to find the set of articles which are most similar to it, thus finding the category of articles which make a topic surrounding COVID in the UK. 
+
+This initial prototyping provides emperical evidence for the effectiveness of this algorithm which comes with many benefits: 
+1. it is scalable and can efficiently process hundreds of thousands of articles using a standard laptop with an intel i7 core;
+2. its classification of articles is completely transparent and is fully represented by probability distributions and its graphical model (Figure 5 of [LDA](README_contents/LDA-model.pdf));
+3. the environmental costs are low as the algorithm trains in under 15 mins for 30,000 articles and doesn't require hours or even days to get good results (compared to deep neural networks for classification).
 
 
 #### The Milestones for 12 Months:
