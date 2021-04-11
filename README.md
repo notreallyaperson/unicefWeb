@@ -38,6 +38,17 @@ We are constantly running tests to understand our model and results better. The 
 
 In gathering the data, we have recently had great technical improvements with a fully automated adding of recent articles to the database (currently limited by our compute power and storage capacity) which will improve our testing capabilities in the near future.
 
+------------------------------------------
+Latest Prototyping:
+
+The fully automated article retrieval system has stored over 70,000 articles from various websites with freely available content. This batch job runs around 4 times per week and collects the most recent articles published.
+
+The latest testing has been done on a subset of 30,000 articles from [various sources](README_contents/feeds_legend.txt) collected between January and April 2021. Note that the distribution over [time](README_contents/dates.png) and [source](feeds.png) biases the results of the prototyping.
+
+The vocabulary used for training is divided in to [good](http://crr.ugent.be/) and [bad](https://www.kaggle.com/nicapotato/bad-bad-words) words. The recent testing used only the set of 'good' words, however, the subsequent testing will use the 'bad' words incorporated by giving the algorithm the prior knowledge of a topic containing the 'bad' words.
+
+The algorithm was trained with the prior assumption of the corpus containing 20, 50, 100 & 200 hidden topics. The log predictive likelihood of the test data was used to assess the effectiveness of the algorithm. The results showed that training on [20 topics](README_contents/AttemptA-elbo_logpred-20.png) or [200 topics](README_contents/AttemptA-elbo_logpred-200.png) almost always led to overfitting the test data. Proceeding with [50 topics](README_contents/AttemptA-elbo_logpred-50.png) or [100 topics](README_contents/AttemptA-elbo_logpred-100.png) very often led to an effective algorithm.
+
 
 #### The Milestones for 12 Months:
 
@@ -48,42 +59,6 @@ In gathering the data, we have recently had great technical improvements with a 
 5. Create safe space mode to remove all potentially harmful content
 6. Create feature to prompt users when accessing large quantities of potentially harmful content
 
-
-#### The Estimated Budget:
-We will assign the budget allocation for each milestone:
-
-1. (Budget Allocation: US$15000) Improve machine learning algorithm to get large and more accurate category sets
- - Testing Alternative models
- - Analysing model outputs
- - Improving algorithm logic
-
-
-2. (Budget Allocation: US$5000) UI/UX to improve accessibility and encourage use
-Market Research
- - Asset Creation
- - App Design
-
-
-3. (Budget Allocation: US$5000) Create frontend website
- - Implementing designs in react
- - Creating backend APIs to access the backend data
-
-
-4. (Budget Allocation: US$5000) Add trigger warning capabilities to potentially harmful content
- - UI/UX design
- - React Site creation
-
-
-5. (Budget Allocation: US$5000) Create safe space mode to remove all potentially harmful content
- - UI/UX design
- - React Site creation
-
-
-6. (Budget Allocation: US$5000) Create feature to prompt users when accessing large quantities of potentially harmful content - chatbot
- - UI/UX design
- - React Site creation
-
-Total budget for 12 months: US$40000
 
  #### The Team:
 
