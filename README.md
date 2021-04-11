@@ -22,7 +22,7 @@ In the long run, we are thinking about using the collected data in order to acco
 
 We are using a data-driven learning technique to understand the topical information of an extremely large corpus of unlabelled articles or documents. The [Latent Dirichlet Allocation](README_contents/LDA-model.pdf) (LDA) model is an unsupervised learning model that outputs the topic proportions of each document based on the likelihood that a word of the document belongs to a particular topic. With more data the model learns the assignment of the topics better. Unfortunately, with most learning methods the time to train a model increases exponentially with the size of the corpus. However, in 2013 Hoffman et al developed a scalable learning method for the model which we implement in the context of online safety.
 
-Combining this with RSS feed technology, we have developed a way to automate the collection of huge numbers of articles and learn the documents’ topics in an efficient and scalable manner without the need for human intervention.
+Combining this with [RSS feed](https://rss.com/) technology, we have developed a way to automate the collection of huge numbers of articles and learn the documents’ topics in an efficient and scalable manner without the need for human intervention.
 
 These topical assignments of the articles allow us to find articles which talk about similar things and also find articles which are extremely different from one another without ever having to read the article. Applying this to the context of safety on the internet, based solely on the words used in an article, we can classify potentially dangerous articles for a younger readership.
 
@@ -52,7 +52,7 @@ Currently, the categories found are a compound of topics and are best represente
 
 This initial prototyping provides emperical evidence for the effectiveness of this algorithm which comes with many benefits: 
 1. it is scalable and can efficiently process hundreds of thousands of articles using a standard laptop with an intel i7 core;
-2. its classification of articles is completely transparent and is fully interpretable by probability distributions and its [graphical model](README_contents/LDA-Graphical-Model.png) (refer t0 [LDA](README_contents/LDA-model.pdf) for more details);
+2. its classification of articles is completely transparent and is fully interpretable by probability distributions and its [graphical model](README_contents/LDA-Graphical-Model.png) (refer to [LDA](README_contents/LDA-model.pdf) for more details);
 3. the environmental costs are low as the algorithm trains in under 15 mins for 30,000 articles and doesn't require hours or even days to get good results (compared to deep neural networks for classification).
 
 
@@ -82,9 +82,9 @@ This initial prototyping provides emperical evidence for the effectiveness of th
 
 ***Name:*** Tamara Anjani  
 ***Gender:*** Female  
-***Bio:*** I am a third year Economics & Management student at University of Bristol. I’m a social media manager for The Pangean, an online magazine where I increase outreach and capture audiences through social media. Being very interested in journalism, I’ve also taken on a role as a podcast writer for PPI UK.  A passion in humanitarian and environmental work will also allow me to manage the business through an ethical lens. Finally, my experience in consulting can offer valuable insight into business operations ensuring the project runs efficiently and successfully.  
+***Bio:*** I am a third year Economics & Management student at University of Bristol. I’m a social media manager for The Pangean, an online magazine where I increase outreach and capture audiences through social media. Being very interested in journalism, I’ve also taken on a role as a podcast writer for PPI UK. A passion in humanitarian and environmental work will also allow me to manage the business through an ethical lens. Finally, my experience in consulting can offer valuable insight into business operations ensuring the project runs efficiently and successfully.  
 ***Role in the Team:*** Project and Business Manager  
- ***Nationality:*** Indonesian  
+***Nationality:*** Indonesian  
 
 ***Name:*** Kheeran Naidu  
 ***Gender:*** Male  
@@ -109,3 +109,5 @@ For K topics, a vocabulary of size V and a corpus with D documents/articles, the
 ### References
 
 Hoffman, M.D., Blei, D.M., Wang, C. and Paisley, J., 2013. Stochastic variational inference. The Journal of Machine Learning Research, 14(1), pp.1303-1347.
+
+[Blei Lab](https://github.com/blei-lab)
