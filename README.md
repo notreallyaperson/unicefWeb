@@ -52,7 +52,7 @@ Currently, the categories found are a compound of topics and are best represente
 
 This initial prototyping provides emperical evidence for the effectiveness of this algorithm which comes with many benefits: 
 1. it is scalable and can efficiently process hundreds of thousands of articles using a standard laptop with an intel i7 core;
-2. its classification of articles is completely transparent and is fully interpretable by probability distributions and its graphical model (Figure 5 of [LDA](README_contents/LDA-model.pdf));
+2. its classification of articles is completely transparent and is fully interpretable by probability distributions and its [graphical model](README_contents/LDA-Graphical-Model.png) (refer t0 [LDA](README_contents/LDA-model.pdf) for more details);
 3. the environmental costs are low as the algorithm trains in under 15 mins for 30,000 articles and doesn't require hours or even days to get good results (compared to deep neural networks for classification).
 
 
@@ -101,7 +101,7 @@ Topic modelling has the goal of grouping words of the same topic without the nee
 
 The nuances of language and required detailed knowledge of an article's context make the task of grouping topically similar words an extremely difficult one, even for human intelligence. Instead, Topic Modelling tries to learn these groupings through a statistical modelling of the textual information of the articles in a corpus.
 
-Latent Dirichlet Allocation (LDA) is one such topic model.  The overall assumptions of the model are that for a fixed vocabulary and pre-determined number of topics, each topic asserts a different distribution of words over the vocabulary. For example, words like law, legal and legislation are more probable under the topic corresponding to politics than they are under the topic corresponding to economics.  This is not to say that it is impossible for the word ‘legislation’ to be drawn from a topic assignment corresponding to economics, it is just very improbable.  Furthermore, the model assumes that within the corpus, each word of each document has some topic assignment which follows the proportion of topics assigned to the document; therefore, if a document is made up of three topics with equal proportions, the topic assignment of the words that make up the document would reflect that.
+[Latent Dirichlet Allocation](README_contents/LDA-model.pdf) (LDA) is one such topic model.  The overall assumptions of the model are that for a fixed vocabulary and pre-determined number of topics, each topic asserts a different distribution of words over the vocabulary. For example, words like law, legal and legislation are more probable under the topic corresponding to politics than they are under the topic corresponding to economics.  This is not to say that it is impossible for the word ‘legislation’ to be drawn from a topic assignment corresponding to economics, it is just very improbable.  Furthermore, the model assumes that within the corpus, each word of each document has some topic assignment which follows the proportion of topics assigned to the document; therefore, if a document is made up of three topics with equal proportions, the topic assignment of the words that make up the document would reflect that.
 
 For K topics, a vocabulary of size V and a corpus with D documents/articles, the LDA model has the following [graphical model representation](README_contents/LDA-Graphical-Model.png) where its assumptions are best given by its corresponding [generative model](README_contents/LDA-Generative-Model.png).
 
