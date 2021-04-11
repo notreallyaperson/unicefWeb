@@ -1,11 +1,10 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const config = require('config');
 const User = require('../../models/User');
 
 module.exports = (req, res) => {
     const { email } = req.body;
-    const password = config.get('password')
+    const password = process.env.password
     // Backend validation
     User.findOne({
         email,

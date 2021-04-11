@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import { useSelector } from 'react-redux'
 import { Redirect } from 'react-router-dom';
+import { Row, Col } from 'reactstrap'
 
 //Import Components
 
@@ -15,14 +16,10 @@ function Landing() {
 
     return (
         <Fragment>
-            <center>
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <h1>Eventual Browser page</h1>
-            </center>
+            <Row>
+                <Col ></Col>
+                <Col></Col>
+            </Row>
         </Fragment>
     );
 }
