@@ -44,7 +44,7 @@ The fully automated article retrieval system has stored over 70,000 articles fro
 
 The latest testing has been done on a subset of 30,000 articles from [various sources](README_contents/feeds_legend.txt) collected between January and April 2021. Note that the distribution over [time](README_contents/dates.png) and [source](README_contents/feeds.png) biases the results of the prototyping.
 
-The vocabulary used for training is divided in to [good](http://crr.ugent.be/) and [bad](https://www.kaggle.com/nicapotato/bad-bad-words) words. The recent testing used only the set of 'good' words, however, the subsequent testing will use the 'bad' words incorporated by giving the algorithm the prior knowledge of a topic containing the 'bad' words.
+The vocabulary used for training is divided into [good](http://crr.ugent.be/) and [bad](https://www.kaggle.com/nicapotato/bad-bad-words) words. The recent testing used only the set of 'good' words, however, the subsequent testing will use the 'bad' words incorporated by giving the algorithm the prior knowledge of a topic containing the 'bad' words.
 
 The algorithm was trained with the prior assumption of the corpus containing 20, 50, 100 & 200 hidden topics. The log predictive likelihood of the test data was used to assess the effectiveness of the algorithm. The results showed that training on [20 topics](README_contents/AttemptA-elbo_logpred-20.png) or [200 topics](README_contents/AttemptA-elbo_logpred-200.png) almost always led to overfitting the test data. Proceeding with [50 topics](README_contents/AttemptA-elbo_logpred-50.png) or [100 topics](README_contents/AttemptA-elbo_logpred-100.png) very often led to an effective algorithm.
 
@@ -52,7 +52,7 @@ Currently, the categories found are a compound of topics and are best represente
 
 This initial prototyping provides emperical evidence for the effectiveness of this algorithm which comes with many benefits: 
 1. it is scalable and can efficiently process hundreds of thousands of articles using a standard laptop with an intel i7 core;
-2. its classification of articles is completely transparent and is fully represented by probability distributions and its graphical model (Figure 5 of [LDA](README_contents/LDA-model.pdf));
+2. its classification of articles is completely transparent and is fully interpretable by probability distributions and its graphical model (Figure 5 of [LDA](README_contents/LDA-model.pdf));
 3. the environmental costs are low as the algorithm trains in under 15 mins for 30,000 articles and doesn't require hours or even days to get good results (compared to deep neural networks for classification).
 
 
