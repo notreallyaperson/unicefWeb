@@ -4,3 +4,4 @@ backend/python/epochs/*.txt
 backend/python/epochs/archive/*.txt
 client-temp
 .env
+config

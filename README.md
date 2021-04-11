@@ -49,6 +49,9 @@ The vocabulary used for training is divided in to [good](http://crr.ugent.be/) a
 
 The algorithm was trained with the prior assumption of the corpus containing 20, 50, 100 & 200 hidden topics. The log predictive likelihood of the test data was used to assess the effectiveness of the algorithm. The results showed that training on [20 topics](README_contents/AttemptA-elbo_logpred-20.png) or [200 topics](README_contents/AttemptA-elbo_logpred-200.png) almost always led to overfitting the test data. Proceeding with [50 topics](README_contents/AttemptA-elbo_logpred-50.png) or [100 topics](README_contents/AttemptA-elbo_logpred-100.png) very often led to an effective algorithm.
 
+Currently, the categories found are a compound of topics and are best represented by showing sets of similar articles: 
+1. 
+
 
 #### The Milestones for 12 Months:
 
