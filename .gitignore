@@ -1,1 +1,5 @@
 node_modules
+*.npy
+backend/python/epochs/*.txt
+backend/python/epochs/archive/*.txt
+client-temp

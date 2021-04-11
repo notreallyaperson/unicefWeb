@@ -47,6 +47,24 @@ router.route('/total').get((req, res) => {
         .catch((err) => res.status(400).json('Error: ' + err));
 });
 
+//@route GET Request api/articles/1000
+// @descr GET 1000 latest articles
+// @access Private
+router.route('/1000/:id').get((req, res) => {
+  Article.find({_id : {$lt: req.params.id}})
+      .sort({ _id: -1 })
+      .select('_id title content')
+      .limit(1000)
+      .then((articles) => {
+        if (articles) {
+          res.json( { articles: articles } );
+        } else {
+          res.json( { articles: null } );
+        }
+      })
+      .catch((err) => res.status(400).json('Error: ' + err));
+});
+
 //@route PATCH Request api/articles
 // @descr update a article using their ID
 // @access Private
@@ -61,14 +79,6 @@ router.route('/').patch(auth, isAdmin, require('./updateArticle'));
 //         .catch((err) => res.status(400).json('Error: ' + err));
 // });
 
-//@route DELETE Request api/articles/all
-// @descr delete all articles
-// @access Private
-router.route('/all').delete((req, res) => {
-    Article.deleteMany({})
-        .then(() => res.json({ message: 'Deleted All Successfully' }))
-        .catch((err) => res.status(400).json('Error: ' + err));
-});
 
 //@route GET Request api/articles
 // @descr find a article using their ID
