@@ -26,3 +26,12 @@ export const UPDATE_USER = 'UPDATE_USER'
 export const SET_USER_UPDATED = 'SET_USER_UPDATED'
 export const GET_USER = 'GET_USER'
 export const SET_USER = 'SET_USER'
+
+// For articles
+export const ARTICLE_FAIL = 'ARTICLE_FAIL'
+export const GET_ARTICLES = 'GET_ARTICLES'
+export const LOAD_ARTICLES = 'LOAD_ARTICLES'
+
+// For articles
+export const RSSFEED_FAIL = 'RSSFEED_FAIL'
+export const GET_RSSFEEDS = 'GET_RSSFEEDS'

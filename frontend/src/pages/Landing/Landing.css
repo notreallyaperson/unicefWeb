@@ -1,0 +1,11 @@
+@media (min-width: 767px) {
+	.show-in-small-screen {
+		display: none;
+	}
+}
+
+@media (max-width: 767px) {
+	.hide-in-small-screen {
+		display: none;
+	}
+}

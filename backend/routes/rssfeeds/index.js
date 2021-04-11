@@ -14,7 +14,7 @@ router.route('/').post(require('./addRssFeed'));
 // @access Private
 router.route('/').get((req, res) => {
     RssFeed.find()
-        .select('-createdAt -updatedAt -__v')
+        .select('-createdAt -updatedAt -__v -bloomFilter')
         .then((rssfeeds) => res.json(rssfeeds))
         .catch((err) => res.status(400).json('Error: ' + err));
 });
