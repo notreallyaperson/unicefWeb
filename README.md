@@ -42,7 +42,7 @@ In gathering the data, we have recently had great technical improvements with a 
 
 The fully automated article retrieval system has stored over 70,000 articles from various websites with freely available content. This batch job runs around 4 times per week and collects the most recent articles published.
 
-The latest testing has been done on a subset of 30,000 articles from [various sources](README_contents/feeds_legend.txt) collected between January and April 2021. Note that the distribution over [time](README_contents/dates.png) and [source](feeds.png) biases the results of the prototyping.
+The latest testing has been done on a subset of 30,000 articles from [various sources](README_contents/feeds_legend.txt) collected between January and April 2021. Note that the distribution over [time](README_contents/dates.png) and [source](README_contents/feeds.png) biases the results of the prototyping.
 
 The vocabulary used for training is divided in to [good](http://crr.ugent.be/) and [bad](https://www.kaggle.com/nicapotato/bad-bad-words) words. The recent testing used only the set of 'good' words, however, the subsequent testing will use the 'bad' words incorporated by giving the algorithm the prior knowledge of a topic containing the 'bad' words.
 
