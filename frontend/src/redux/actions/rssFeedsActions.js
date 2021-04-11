@@ -5,9 +5,9 @@ import { returnErrors, clearErrors } from './errorActions'
 import { baseURL } from '../helpers'
 
 
-export const getRssFeeds = (page) => (dispatch, getState) => {
+export const getRssFeeds = () => (dispatch, getState) => {
     dispatch(clearErrors())
-    axios.get(`${baseURL}/rssfeeds`, tokenConfig(getState))
+    axios.get(`${baseURL}/rssfeeds/frontend`, tokenConfig(getState))
         .then(response => {
             dispatch({
                 type: GET_RSSFEEDS,
