@@ -1,8 +1,6 @@
 ---------------
-# UNICEF Project  
-
-[Video Pitch Round 1](https://www.youtube.com/watch?v=Jvpj3bxbZJA&list=PLLDZif6o0EQ5JQ2XgrGYL-LURhbZ6YzWe&index=1)
-[Video Pitch Round 2](https://www.youtube.com/watch?v=DpeucqedO5I&list=PLLDZif6o0EQ5JQ2XgrGYL-LURhbZ6YzWe&index=2)
+# UNICEF Innovation Fund 2021  
+#### Video Pitch: [Round 1](https://www.youtube.com/watch?v=Jvpj3bxbZJA&list=PLLDZif6o0EQ5JQ2XgrGYL-LURhbZ6YzWe&index=1) & [Round 2](https://www.youtube.com/watch?v=DpeucqedO5I&list=PLLDZif6o0EQ5JQ2XgrGYL-LURhbZ6YzWe&index=2)
 ----------------
 
 #### The Need:
@@ -39,6 +37,8 @@ These topical assignments of the articles allow us to find articles which talk a
 An added benefit of the LDA model is that the results are fully interpretable. For instance, we can easily understand why the machine learning algorithm has flagged a particular article as dangerous. This is something that is lacking in most deep learning implementations of natural language processing. This allows us to understand fully the behaviour of the algorithm and, if need be, review any of the topical assignments made - allowing us to analyse and improve the algorithm as we progress.
 
 #### The Results of Prototyping:
+
+*Initial Prototyping:*
 
 Written a masters thesis on the concept. Have researched the theoretical applications thoroughly. From the concept have created a Proof of Concept where we have tested out the algorithm which shows promising results. The next step is to retrieve a larger data set to improve the models accuracy even further.
 
