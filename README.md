@@ -38,7 +38,7 @@ An added benefit of the LDA model is that the results are fully interpretable. F
 
 #### The Results of Prototyping:
 
-*Initial Prototyping:*
+*(Dec 2020) Initial Prototyping:*
 
 Written a masters thesis on the concept. Have researched the theoretical applications thoroughly. From the concept have created a Proof of Concept where we have tested out the algorithm which shows promising results. The next step is to retrieve a larger data set to improve the models accuracy even further.
 
@@ -48,7 +48,7 @@ We are constantly running tests to understand our model and results better. The 
 
 In gathering the data, we have recently had great technical improvements with a fully automated adding of recent articles to the database (currently limited by our compute power and storage capacity) which will improve our testing capabilities in the near future.
 
-*Latest Prototyping:*
+*(Apr 2021) Latest Prototyping:*
 
 The fully automated article retrieval system has stored over 70,000 articles from various websites with freely available content. This batch job runs around 4 times per week and collects the most recent articles published.
 
@@ -60,7 +60,7 @@ The algorithm was trained with the prior assumption of the corpus containing 20,
 
 Currently, the categories found are a compound of topics and are best represented by showing [sets of similar articles](README_contents/categories.txt). For example, using an article related to COVID in the UK, the algorithm is able to find the set of articles which are most similar to it, thus finding the category of articles which make a topic surrounding COVID in the UK. 
 
-This initial prototyping provides significant emperical evidence for the effectiveness of this algorithm which comes with many benefits: 
+This prototyping provides significant emperical evidence for the effectiveness of this algorithm which comes with many benefits: 
 1. it is scalable and can efficiently process hundreds of thousands of articles using a standard laptop with an intel i7 core;
 2. its classification of articles is completely transparent and is fully interpretable by probability distributions and its [graphical model](README_contents/LDA-Graphical-Model.png) (refer to [LDA](README_contents/LDA-model.pdf) for more details);
 3. the environmental costs are low as the algorithm trains in under 30 mins for 30,000 articles and doesn't require hours or even days to get good results (compared to deep neural networks).
@@ -111,7 +111,7 @@ Topic modelling has the goal of grouping words of the same topic without the nee
 
 The nuances of language and required detailed knowledge of an article's context make the task of grouping topically similar words an extremely difficult one, even for human intelligence. Instead, Topic Modelling tries to learn these groupings through a statistical modelling of the textual information of the articles in a corpus.
 
-[Latent Dirichlet Allocation](README_contents/LDA-model.pdf) (LDA) is one such topic model.  The overall assumptions of the model are that for a fixed vocabulary and pre-determined number of topics, each topic asserts a different distribution of words over the vocabulary. For example, words like law, legal and legislation are more probable under the topic corresponding to politics than they are under the topic corresponding to economics.  This is not to say that it is impossible for the word ‘legislation’ to be drawn from a topic assignment corresponding to economics, it is just very improbable.  Furthermore, the model assumes that within the corpus, each word of each document has some topic assignment which follows the proportion of topics assigned to the document; therefore, if a document is made up of three topics with equal proportions, the topic assignment of the words that make up the document would reflect that.
+[Latent Dirichlet Allocation](README_contents/LDA-model.pdf) (LDA) is one such topic model.  The overall assumptions of the model are that for a fixed vocabulary and pre-determined number of topics, each topic asserts a different distribution of words over the vocabulary. For example, words like law, legal and legislation are more probable under the topic corresponding to politics than they are under the topic corresponding to economics.  This is not to say that it is impossible for the word ‘legislation’ to be drawn from a topic assignment corresponding to economics, it is just very improbable.  Furthermore, the model assumes that within the corpus, each word of each document has some topic assignment which follows the document's distribution of topics; therefore, if a document is made up of three topics with equal proportions, the topic assignment of the words that make up the document would reflect that.
 
 For K topics, a vocabulary of size V and a corpus with D documents/articles, the LDA model has the following [graphical model representation](README_contents/LDA-Graphical-Model.png) where its assumptions are best given by its corresponding [generative model](README_contents/LDA-Generative-Model.png).
 
