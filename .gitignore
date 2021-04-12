@@ -2,6 +2,7 @@ node_modules
 *.npy
 backend/python/epochs/*.txt
 backend/python/epochs/archive/*.txt
+backend/python/Database Metrics/epochs/*.txt
 client-temp
 .env
 config

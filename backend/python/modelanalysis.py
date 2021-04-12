@@ -1,6 +1,7 @@
 
 import library as lib
 import numpy as np
+import re
 
 # np.set_printoptions(precision=0)
 np.set_printoptions(suppress=True)
@@ -18,18 +19,20 @@ total_num_epochs = 60
 attempt = 5
 num_topics = 50
 
+_dir = 'epochs/good/'
+
 def shuffle(list_array, order):
     return list(np.array(list_array)[order])
 
 # Setting up the parameters for analysis
-orderA = np.load('epochs/Attempt (' + str(num_topics) + 'T)_' + str(attempt) + '/AttemptA-order-' + str(num_topics) + '-epoch-' + str(epoch) +'.npy')
-vocab = lib.load_from_file('vocab/badwords.txt')
+orderA = np.load(_dir + 'Attempt (' + str(num_topics) + 'T)_' + str(attempt) + '/AttemptA-order-' + str(num_topics) + '-epoch-' + str(epoch) +'.npy')
+vocab = lib.load_from_file('vocab/goodwords.txt')
 titles = shuffle(lib.load_from_file('epochs/titles-epoch-' + str(epoch) + '.txt'), orderA)
 contents = shuffle(lib.load_from_file('epochs/contents-epoch-' + str(epoch) + '.txt'), orderA)
-lamA = np.load('epochs/Attempt (' + str(num_topics) + 'T)_' + str(attempt) + '/AttemptA-lam-' + str(num_topics) + '.npy') 
-gamA = np.load('epochs/Attempt (' + str(num_topics) + 'T)_' + str(attempt) + '/AttemptA-gam-' + str(num_topics) + '-epoch-' + str(epoch) +'.npy')
-# lamB = np.load('epochs/Attempt (' + str(num_topics) + 'T)_' + str(attempt) + '/AttemptB-lam-' + str(num_topics) + '.npy')
-# gamB = np.load('epochs/Attempt (' + str(num_topics) + 'T)_' + str(attempt) + '/AttemptB-gam-' + str(num_topics) + '-epoch-' + str(epoch) +'.npy')
+lamA = np.load(_dir + 'Attempt (' + str(num_topics) + 'T)_' + str(attempt) + '/AttemptA-lam-' + str(num_topics) + '.npy') 
+gamA = np.load(_dir + 'Attempt (' + str(num_topics) + 'T)_' + str(attempt) + '/AttemptA-gam-' + str(num_topics) + '-epoch-' + str(epoch) +'.npy')
+# lamB = np.load(_dir + 'Attempt (' + str(num_topics) + 'T)_' + str(attempt) + '/AttemptB-lam-' + str(num_topics) + '.npy')
+# gamB = np.load(_dir + 'Attempt (' + str(num_topics) + 'T)_' + str(attempt) + '/AttemptB-gam-' + str(num_topics) + '-epoch-' + str(epoch) +'.npy')
 K = lamA.shape[0]
 batch_size = gamA.shape[0]
 # batch_size = 500
@@ -43,9 +46,9 @@ modelA._lambda = lamA
 # Display
 print(len(modelA._vocab))
 print(len(lamA[0]))
-ordered_lamA = modelA.view_sorted_topics(topics=10, length=50)
+# ordered_lamA = modelA.view_sorted_topics(topics=10, length=50)
 # pause()
-ordered_gamA = modelA.view_sorted_documents(gamA, documents=100, no_print=True)
+# ordered_gamA = modelA.view_sorted_documents(gamA, documents=100, no_print=True)
 
 # topic_gams = []
 # topic_gams_actual = []
@@ -82,13 +85,13 @@ KL_D = np.zeros((gamA.shape[0], gamA.shape[0]))
 # Load gams from all epochs
 alltitles = shuffle(lib.load_from_file('epochs/titles-epoch-' + str(0) + '.txt'), orderA)
 allcontents = shuffle(lib.load_from_file('epochs/contents-epoch-' + str(0) + '.txt'), orderA)
-allgams = np.load('epochs/Attempt (' + str(num_topics) + 'T)_' + str(attempt) + '/AttemptA-gam-' + str(num_topics) + '-epoch-' + str(0) +'.npy')
+allgams = np.load(_dir + 'Attempt (' + str(num_topics) + 'T)_' + str(attempt) + '/AttemptA-gam-' + str(num_topics) + '-epoch-' + str(0) +'.npy')
 
 for i in range(1, 60):
-    temporderA = np.load('epochs/Attempt (' + str(num_topics) + 'T)_' + str(attempt) + '/AttemptA-order-' + str(num_topics) + '-epoch-' + str(i) +'.npy')
+    temporderA = np.load(_dir + 'Attempt (' + str(num_topics) + 'T)_' + str(attempt) + '/AttemptA-order-' + str(num_topics) + '-epoch-' + str(i) +'.npy')
     temptitles = shuffle(lib.load_from_file('epochs/titles-epoch-' + str(i) + '.txt'), temporderA)
     tempcontents = shuffle(lib.load_from_file('epochs/contents-epoch-' + str(i) + '.txt'), temporderA)
-    tempgam = np.load('epochs/Attempt (' + str(num_topics) + 'T)_' + str(attempt) + '/AttemptA-gam-' + str(num_topics) + '-epoch-' + str(i) +'.npy')
+    tempgam = np.load(_dir + 'Attempt (' + str(num_topics) + 'T)_' + str(attempt) + '/AttemptA-gam-' + str(num_topics) + '-epoch-' + str(i) +'.npy')
     alltitles += temptitles
     allcontents += tempcontents
     allgams = np.concatenate((allgams, tempgam), axis=0)
@@ -126,12 +129,21 @@ i_s = [216, 295, 201]
 
 i_s = [ list(orderA).index(i) for i in i_s]
 
-# i_s.append(13821)
-i_s.append(18716)
+i_s.append(16077)
+i_s.append(25663)
+i_s.append(26639)
+# i_s.append(16642)
+i_s.append(17719)
+i_s.append(5322)
+i_s.append(15654)
+i_s.append(25673)
+i_s.append(22797)
+# i_s.append(np.random.choice(30000))
+# i_s.append(np.random.choice(30000))
 
 for i in i_s:
         
-    print('-----------------------------------------------------------------------------------------')
+    print('---------------------------------------------------------------------------------------------------------------------------------------------------')
 
 
     for j in range(similar.shape[0]):
@@ -139,8 +151,8 @@ for i in i_s:
 
 
     ordered_similar = np.argsort(similar)[:10]
-    print(ordered_similar)
-    print(similar[ordered_similar])
+    # print(ordered_similar)
+    # print(similar[ordered_similar])
 
 
 
@@ -149,10 +161,11 @@ for i in i_s:
         # print("Similarity:", similar[i])
         # print(topic_allgams[i])
         # print(topic_allgams_actual[i])
-        print(alltitles[i])
+        # print('Similarity:', round(similar[i], 3))
+        print('Title:', re.sub( r' +', ' ' , alltitles[i]))
         # print(len(allcontents[i]))
         # print(contents[i])
-        print()
+        # print()
 
 # KL_D = np.zeros((20, 20))
 # for i in range(KL_D.shape[0]):

@@ -69,7 +69,7 @@ def stopwords():
 # function of type string, list of strings -> bool
 def valid_word(word, stopwords=stopwords()):
     if (len(word) > 2): # exclude words shorter than 2 characters
-        # if (word in eng_words): # include only english words
+        if (word in eng_words): # include only english words
             if (not word in stopwords): # exclude list of stopwords
                 # if (nltk.corpus.wordnet.synsets(word)[0].pos() != 'v'): # exclude verbs (NOT A GOOD IDEA)
                     return True
