@@ -6,16 +6,26 @@
 ----------------
 
 #### The Need:
-Our solution is addressing the need for a safe online place for younger people, when it comes to getting their news. Nowadays, more and more people are getting their news online. Based on different studies, within the age group of 18 to 24 years old, more than 80% are getting their news online. We currently can’t find specific data about minors. But knowing that most kids get their first mobile phone by the age of 10/11 years old, it is most likely for them to go first to the internet to find answers to their questions, when it comes to what is going on in the world.
-We want to promote reading the news online, because knowing about the world gives you a better understanding of it, and makes you a better citizen. But we want to provide a safe place for that.
+We want to create a safe space online for young people and encourage the safer consumption of news online, since there are lots of biases, misinformation, and negativity in the media which could be damaging for young people. According to various studies, more than 80% of people aged 18-24 are getting their news online, and the internet is their first stop when it comes to finding answers. 
+
+We want to promote more of this, because knowing about the world gives you a better understanding of it and makes you a better citizen. We aim to do this in a constructive way which promotes a healthy relationship between children and the media in a way which prevents them feeling overwhelmed by the negative and occasionally incorrect information.
+
 
 #### The Solution:
-Our idea is to promote the reading of online news for younger people : from 13 years old and above. We want to bring safety through different aspects.
-Firstly by gathering in one place different articles from legitimate news websites, reducing the risk of fake news, and promoting the reading of news online by making it easier. They don’t need to go on different websites anymore to have a satisfying range of information, it’s safer, it’s faster, it’s nicer !
+We want to bring online safety through different aspects of our proposed online news platform:
 
-Then, the safety aspect comes again through the organisation of the articles. Indeed, articles will be categorised based on their topics. From that point, we plan to develop a safe space version (filtering out potentially harmful content) and a trigger warnings version, in which we can inform the user about the type of information he/she is going to read about. Being aware of what is coming your way makes you able to deal with it in a better way than if it was brutally thrown at you.
+- gathering articles from various legitimate news websites, we provide one easily accessible place from which children and young people can read the news. They don't need to go on different websites to have a satisfying range of information;
+- we will offer 2 additional extensions to our platform: a “safe space” version (which filters out potentially harmful content), and a “trigger warning” version (which informs the user about the type of info. they are about to read). Informing them about what they are about to read would prepare them to deal with it better than if it was brutally thrown at them;
+- in the long run, use a user's data to accompany them in their online journey. For instance, if a user has been reading a lot of dark news, we could share a happy message to make them smile via our chatbot, or perhaps even suggest visiting another online platform which could help them if needed.
 
-In the long run, we are thinking about using the collected data in order to accompany the user in its journey. For instance, if we find out that a user has been reading a lot of dark news, we could then share a happy little message to make him/her smile (via a chatbot), or even suggest the visit of a proper online platform which can help the user if needed. We look forward to exploring the various possibilities.
+#### The Value:
+
+Reduced search cost in finding news articles to read. Less time is spent scouring different news sites searching for similar articles as it places all the content in a single place for the users. Organises the articles into an unsupervised categorisation which helps the readers get a better picture of what is being said about a topic. Provides transparency to why and how that articles are being categorised and why they are determined to be similar. 
+
+This allows us to filter and provide warnings for potentially harmful content which overall creates a safer, organised and transparent platform for children to access the news.
+
+This technology will significantly improve the journey of children getting the news and promotes a healthier and more diverse set of information. Therefore, parents can comfortably allow their children to access current affairs.
+
 
 #### The Technologies:
 *(Data Science & Machine Learning)*
@@ -32,7 +42,7 @@ An added benefit of the LDA model is that the results are fully interpretable. F
 
 Written a masters thesis on the concept. Have researched the theoretical applications thoroughly. From the concept have created a Proof of Concept where we have tested out the algorithm which shows promising results. The next step is to retrieve a larger data set to improve the models accuracy even further.
 
-The current implementation shows practical proof of the theorised scalable learning method. The accuracy of the topical classification also proves to be comparable to currently used methods - where the shear increase in volume of articles combats the potential loss in accuracy from the scalable method. Here are the results using a corpus of 2000+ articles for [3 topics](README_contents/k3.png), [10 topics](README_contents/k10.png) and [50 topics](README_contents/k50.png).
+The current implementation shows practical proof of the theorised scalable learning method. The accuracy of the topical classification also proves to be comparable to currently used methods (Gibbs Sampling and Coordinate Ascent Variational Inference) - where the shear increase in volume of articles combats the potential loss in accuracy from the scalable method. Here are the results using a corpus of 2000+ articles for [3 topics](README_contents/k3.png), [10 topics](README_contents/k10.png) and [50 topics](README_contents/k50.png).
 
 We are constantly running tests to understand our model and results better. The current topical classifications of our results on 2 datasets (approx 800 and 2000 words) work at distinguishing some more general topics present, but we expect that these results will significantly improve by the time the dataset grows to the tens of thousands.
 
@@ -46,14 +56,14 @@ The latest testing has been done on a subset of 30,000 articles from [various so
 
 The vocabulary used for training is divided into [good](http://crr.ugent.be/) and [bad](https://www.kaggle.com/nicapotato/bad-bad-words) words. The recent testing used only the set of 'good' words, however, the subsequent testing will use the 'bad' words incorporated by giving the algorithm the prior knowledge of a topic containing the 'bad' words.
 
-The algorithm was trained with the prior assumption of the corpus containing 20, 50, 100 & 200 hidden topics. The log predictive likelihood of the test data was used to assess the effectiveness of the algorithm. The results showed that training on [20 topics](README_contents/AttemptA-elbo_logpred-20.png) or [200 topics](README_contents/AttemptA-elbo_logpred-200.png) almost always led to overfitting the test data. Proceeding with [50 topics](README_contents/AttemptA-elbo_logpred-50.png) or [100 topics](README_contents/AttemptA-elbo_logpred-100.png) very often led to an effective algorithm.
+The algorithm was trained with the prior assumption of the corpus containing 20, 50, 100 & 200 hidden topics. The log predictive likelihood of the test data was used to assess the effectiveness of the algorithm. The results showed that training on [20 topics](README_contents/AttemptA-elbo_logpred-20.png) or [200 topics](README_contents/AttemptA-elbo_logpred-200.png) almost always led to overfitting the test data. Proceeding with [50 topics](README_contents/AttemptA-elbo_logpred-50.png) or [100 topics](README_contents/AttemptA-elbo_logpred-100.png) very often led to an effective algorithm with 50 topics having the slightly higher accuracy.
 
-Currently, the categories found are a compound of topics and are best represented by showing [sets of similar articles](). For example, using an article related to COVID in the UK, the algorithm is able to find the set of articles which are most similar to it, thus finding the category of articles which make a topic surrounding COVID in the UK. 
+Currently, the categories found are a compound of topics and are best represented by showing [sets of similar articles](README_contents/categories.txt). For example, using an article related to COVID in the UK, the algorithm is able to find the set of articles which are most similar to it, thus finding the category of articles which make a topic surrounding COVID in the UK. 
 
-This initial prototyping provides emperical evidence for the effectiveness of this algorithm which comes with many benefits: 
+This initial prototyping provides significant emperical evidence for the effectiveness of this algorithm which comes with many benefits: 
 1. it is scalable and can efficiently process hundreds of thousands of articles using a standard laptop with an intel i7 core;
 2. its classification of articles is completely transparent and is fully interpretable by probability distributions and its [graphical model](README_contents/LDA-Graphical-Model.png) (refer to [LDA](README_contents/LDA-model.pdf) for more details);
-3. the environmental costs are low as the algorithm trains in under 15 mins for 30,000 articles and doesn't require hours or even days to get good results (compared to deep neural networks for classification).
+3. the environmental costs are low as the algorithm trains in under 30 mins for 30,000 articles and doesn't require hours or even days to get good results (compared to deep neural networks).
 
 
 #### The Milestones for 12 Months:
