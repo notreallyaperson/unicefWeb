@@ -1,8 +1,8 @@
 ---------------
 # UNICEF Project  
 
-[Video Pitch](https://www.youtube.com/watch?v=Jvpj3bxbZJA&list=PLLDZif6o0EQ5JQ2XgrGYL-LURhbZ6YzWe&index=1)
-
+[Video Pitch Round 1](https://www.youtube.com/watch?v=Jvpj3bxbZJA&list=PLLDZif6o0EQ5JQ2XgrGYL-LURhbZ6YzWe&index=1)
+[Video Pitch Round 2](https://www.youtube.com/watch?v=DpeucqedO5I&list=PLLDZif6o0EQ5JQ2XgrGYL-LURhbZ6YzWe&index=2)
 ----------------
 
 #### The Need:
