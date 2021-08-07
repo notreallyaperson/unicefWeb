@@ -1,0 +1,18 @@
+version: "3"
+services:
+  mongo:
+    container_name: unicef-mongo
+    image: mongo:latest
+    volumes:
+      - ./mongo-volume:/data/db
+      - ./mongo-init.sh:/docker-entrypoint-initdb.d/mongo-init.sh:ro
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=rootUser
+      - MONGO_INITDB_ROOT_PASSWORD=safhki2gv2gj
+      - MONGO_INITDB_DATABASE=unicefDB
+      - MONGO_INITDB_USERNAME=unicefUser
+      - MONGO_INITDB_PASSWORD=Sgf8223g2jjxjEO25sa
+    ports:
+      - 27016:27017
+volumes:
+  mongo-volume:

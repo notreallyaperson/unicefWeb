@@ -6,3 +6,4 @@ backend/python/Database Metrics/epochs/*.txt
 client-temp
 .env
 config
+mongo-volume
